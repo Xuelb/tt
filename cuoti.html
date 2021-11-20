@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="cuoti.css" rel="stylesheet" type="text/css">
+    <title>Question</title>
+</head>
+<body>
+    <section id="box">
+        <header class="header">
+            <h1>错题本</h1>
+            <input type="text" class="new-todo" placeholder="添加单词"  @keyup.enter="AddContent()" v-model="inputValue"/>
+        </header>
+
+        <section class="main">
+            <ul class="todo-list">
+                <li class="todo" v-for="(item,index) in items">
+                    <div class="view">
+                        <input type="checkbox" class="view-image" v-bind:id="item.content" v-model="item.complete" @click="Select(index)">
+                        <div class="view-content" v-bind:style="{ color:item.color,textDecoration:item.isLine}">{{ item.content }}</div>
+                        <button class="destroy" @click="Remove(index)" value="X">X</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <span class="todo-count">
+                共<strong>{{ items.length }}</strong>项
+            </span>
+            <span class="todo-select">
+                <button class="select-all" @click="ShowAll()">所有</button>
+                <button class="select-uncompleted" @click="ShowUncompleted()">未复习</button>
+                <button class="select-completed" @click="ShowCompleted()">已复习</button>
+            </span>
+            <span class="todo-clear">
+                 <button class="clear-completed" @click="ClearAll()">清除已复习</button>
+            </span>
+        </footer>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#box",
+            data:{
+                inputValue:"",
+                items: []
+            },
+            methods:{
+                // 添加任务
+                AddContent(){
+                    if(!window.localStorage){
+                        console.log("AddContent()调用失败");
+                        return false;
+                    }else{
+                        // console.log("添加任务");                    
+                        this.items.push({
+                            content:this.inputValue,
+                            complete:false
+                        })
+                        var storage = window.localStorage
+                        var temp = JSON.parse(storage.getItem("save"))
+                        console.log({content:this.inputValue,complete:false});
+                        temp.push({
+                            content:this.inputValue,
+                            complete:false
+                        })
+                        storage.setItem("save",JSON.stringify(temp))
+                        this.inputValue = ""
+                    }
+                },
+                //清除单个任务 
+                Remove(index){
+                    if(!window.localStorage){
+                        console.log("Remove()调用失败");
+                        return false;
+                    }else{
+                        // console.log("清除操作成功");
+                        var storage = window.localStorage
+                        var temp = JSON.parse(storage.getItem("save"))
+                        for(let i=0;i<temp.length;i++){
+                            if(temp[i].content === this.items[index].content){
+                                temp.splice(i,1)
+                            }
+                        }
+                        storage.setItem("save",JSON.stringify(temp))
+                        this.items.splice(index,1)
+                    }
+                },
+                //勾选任务
+                Select(index){
+                    if(!window.localStorage){
+                        console.log("Select()调用失败");
+                        return false;
+                    }else{
+                        // console.log("勾选操作成功");
+                        this.items[index].complete = !this.items[index].complete
+                        if(this.items[index].complete){
+                            this.items[index].color = "grey"
+                            this.items[index].isLine = "line-through"
+                        }
+                        else{
+                            this.items[index].color = "black"
+                            this.items[index].isLine = ""
+                        }
+                        var storage = window.localStorage
+                        var temp = JSON.parse(storage.getItem("save"))
+                        for(let i=0;i<temp.length;i++){
+                            if(temp[i].content === this.items[index].content){
+                                temp[i].complete = this.items[index].complete
+                                temp[i].color = this.items[index].color
+                                temp[i].isLine = this.items[index].isLine
+                            }
+                        }
+                        storage.setItem("save",JSON.stringify(temp))
+                    }
+                },
+                //显示所有任务
+                ShowAll(){
+                    if(!window.localStorage){
+                        console.log("ShowAll()调用失败");
+                        return false;
+                    }else{
+                        // console.log("显示所有任务");
+                        var storage = window.localStorage
+                        var temp = JSON.parse(storage.getItem("save"))
+                        this.items = temp
+                    }
+                },
+                //显示所有未完成任务
+                ShowUncompleted(){
+                    if(!window.localStorage){
+                        console.log("ShowUncompleted()调用成功");
+                        return false;
+                    }else{
+                        // console.log("显示所有未完成任务")
+                        var storage = window.localStorage
+                        var temp = JSON.parse(storage.getItem("save"))
+                        var newItems = []
+                        for(let i=0;i<temp.length;i++){
+                            if(temp[i].complete === false){
+                                newItems.push(temp[i])
+                            }
+                        }
+                        this.items = newItems
+                    }
+                },
+                //显示所有已完成任务
+                ShowCompleted(){
+                    if(!window.localStorage){
+                        console.log("ShowCompleted()调用失败");
+                        return false;
+                    }else{
+                        var storage = window.localStorage
+                        var temp = JSON.parse(storage.getItem("save"))
+                        var newItems = []
+                        for(let i=0;i<temp.length;i++){
+                            if(temp[i].complete === true){
+                                newItems.push(temp[i])
+                            }
+                        }
+                        this.items = newItems
+                    }
+                },
+                //清除所有已完成任务
+                ClearAll(){
+                    if(!window.localStorage){
+                        console.log("ShowCompleted()调用失败");
+                        return false;
+                    }else{
+                        var storage = window.localStorage
+                        var temp = JSON.parse(storage.getItem("save"))
+                        for(let i=0;i<temp.length;i++){
+                            if(temp[i].complete === true){
+                                temp.splice(i,1)
+                                i--
+                            }
+                        }
+                        this.items = temp
+                        storage.setItem("save",JSON.stringify(temp))
+                    }
+                },
+                //初始化任务
+                Init(){
+                    var storage = window.localStorage
+                    var initList = [
+                        {
+                            content:"hello",
+                            complete:false,
+                            color:"black",
+                            isLine:""
+                        },
+                        {
+                            content:"nice",
+                            complete:false,
+                            color:"black",
+                            isLine:""
+                        },
+                        {
+                            content:"world",
+                            complete:false,
+                            color:"black",
+                            isLine:""
+                        },
+                        {
+                            content:"apple",
+                            complete:false,
+                            color:"black",
+                            isLine:""
+                        }]
+                    if((storage.getItem("flag") === null)){
+                        storage.setItem("flag",false)
+                    }
+                    if(storage.getItem("flag") === "false"){
+                        storage.setItem("flag","true")
+                        storage.setItem("save",JSON.stringify(initList))
+                        var temp = JSON.parse(storage.getItem("save"))
+                        this.items = []
+                        for(let i=0;i<temp.length;i++){
+                            this.items.push(temp[i])
+                        }
+                    }
+                    else if(storage.getItem("flag") === "true"){
+                        var temp = JSON.parse(storage.getItem("save"))
+                        this.items = []
+                        for(let i=0;i<temp.length;i++){
+                            this.items.push(temp[i])
+                        }
+                    }
+                },
+            },
+            //页面加载
+            mounted(){
+                this.Init()
+            }
+        })
+    </script>
+</body>
+</html>

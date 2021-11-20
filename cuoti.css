@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url('IMG_3448.JPG');
+    background-size: 100%;
+}
+
+#box{
+    height: 600px;
+    width: 600px;
+    margin: 100px auto;
+}
+
+.header{
+    width: 600px;
+}
+/* 标题 */
+h1{
+    width: 500px;
+    font-family: Tahoma,Arial,sans-serif;
+    font-size: 60px;
+    font-weight: lighter;
+    color: black;
+    text-align:center;
+    margin-left: 100px;
+    margin-top: -50px;
+}
+/* 输入文本框 */
+.new-todo{
+    text-align: center;
+    height: 50px;
+    width: 500px;
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: large;
+    color: gray;
+    border: 1px solid black;
+}
+/* 每项任务 */
+.todo{
+    height: 50px;
+    width: 500px;
+    margin-left: 100px;
+    background-color: white;
+    list-style-type: none;
+    border: 1px solid black;
+}
+
+.todo .view{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+    color: gray;
+}
+/* 任务勾选 */
+.todo .view-image{
+    float: left;
+    height: 100%;
+    width: 20px;
+    border-style: dotted;
+}
+/* 任务内容 */
+.todo .view-content{
+    float: left;
+    margin-left: 20px;
+    font-size: 20px;
+}
+/* 清除单个任务 */
+.destroy{
+    height: 100%;
+    width: 30px;
+    float: right;
+    margin-right: 30px;
+    border-style: none;
+    background-color: white;
+    color: white;
+    font-size: 20px;
+}
+
+.destroy:hover{
+    height: 100%;
+    width: 30px;
+    float: right;
+    margin-right: 30px;
+    border-style: none;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+}
+/*底部按钮*/
+.footer{
+    height: 50px;
+    width: 500px;
+    margin-left: 100px;
+    background-color: white;
+    border: 0.5px solid black;
+}
+/* 显示剩余任务 */
+.todo-count{
+    width:50px;
+    float: left;
+    margin-top: 20px;
+}
+/* 显示三种 */
+.todo-select{
+    width: 200px;
+    float: left;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+/* 清除所有 */
+.todo-clear{
+    width: 80px;
+    float: right;
+    margin-top: 20px;
+}
+

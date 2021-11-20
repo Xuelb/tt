@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Translate</title>
+    <style>
+        html{
+            text-align: center;
+            background-color: #DDDDDD;
+        }
+        hr{
+            border: 4px double #DDDDDD;
+           
+        }
+        h3{
+            font-size: 50px;
+            color:rgb(177, 21, 21);
+        }
+        .bt{
+        	background-color: #5599FF;
+        	width:80px;
+        	height: 30px;
+        	color: white;
+        	border: 0px;
+        	float: right;
+
+        	
+        }
+        select{
+        	width:428px;
+        	height:30px;
+        	margin-top:0px;
+        }
+        .top{
+        	margin-top:1px;
+        	height:auto;
+        	width:1000px;
+        	margin: 0 auto;
+        }
+        .fy{
+        	border: 0px;
+        	width: 50px;
+        	font-size: 15px;
+        	text-align: center;
+        	height: 30px;
+        	background-color: #DDDDDD;
+        }
+        .center{
+        	width:1000px;
+        	margin: 0 auto;
+        	height: 200px;
+        }
+        .left{
+        	width:480px;
+        	height: 200px;
+        	margin-top: 50px;
+        }
+        .right{
+        	width:480px;
+        	height: 200px;
+        	float: right;
+        	margin-top:-200px;
+        }
+        #srcText{
+        	width: 480px;
+        	height: 200px;
+        	font-size: 30px;
+        	font-family: 微软雅黑;
+        	font-weight: bold;
+        }
+        #dstText{
+        	width: 480px;
+        	height: 200px;
+        	font-size: 30px;
+        	font-family: 微软雅黑;
+        	font-weight: bold;
+        }
+        .scbt{
+        	display: inline-block;
+        	height: 230px;
+        	width: 600px;
+        	position: absolute;
+        	right: 0px;
+        	bottom: -100px;
+        }
+        .lishi{
+        	background-color: white;
+        	width: 1000px;
+        	height: 200px;
+        	margin: 0 auto;
+        	text-align: left;
+        }
+        .shoucang{
+        	background-color: white;
+        	width: 1000px;
+        	height: 200px;
+        	margin: 0 auto;
+        	text-align: left;
+        }
+        p{
+        	font-size: 30px;
+        }
+        .qk{
+        	display: inline-block;
+        	height: 250px;
+        	width: 330px;
+        	position: absolute;
+        	right: 0px;
+        	top: 560px;
+        }
+		.die{
+			position: relative;
+			top:-40px;
+			left: 190px;
+		}
+		.ddie{
+			position: relative;
+			top:-40px;
+			left: 190px;
+		}
+    </style>
+</head>
+<body>
+    <div>
+    	<img src="top.jpg" width="1000" height="200">
+    </div>
+    <br>
+    <div class="top">
+	    	<select id="fi">
+	    		<option>英文</option>
+	    		<option>中文</option>
+	    		<option>日文</option>
+	    		<option>法文</option>
+	    		<option>德文</option>
+	    	</select>
+	 
+	    	<input type="text" value="翻译成" class="fy">
+	
+	    	<select id="se">
+	    		<option>中文</option>
+	    		<option>英文</option>
+	    		<option>日文</option>
+	    		<option>法文</option>
+	    		<option>德文</option>
+	    	</select>
+
+	    	<button type="button" id="bbt">翻译</button>
+    </div>
+    <div  class="center">
+    	<div class="left">
+    		<textarea id="srcText" class="hhab"name="ki" placeholder="请输入待翻译内容"></textarea>
+			<button type="button" class="ddie" id="ddddd">清空</button>
+    	</div>
+    	<div class="right">
+    		<textarea id="dstText" name="dstText" placeholder="翻译结果"></textarea>
+    		
+    			<button type="button"class="die"id="ddd">收藏</button>
+    	
+    		
+    	</div>
+    </div>
+	<div  class="center">
+    	<div class="left">
+    		<textarea id="srcText" class="chi"name="srcText" placeholder="收藏夹"></textarea>
+			<!-- <a href="cuoti.html">写入错题本</a> -->
+			<input type="button" onclick="window.open('cuoti.html')" class="ddie" value="写入错题本">
+    	</div>
+    	<div class="right">
+    		<textarea id="dstText" class="noo"name="dstText" placeholder="历史记录"></textarea>
+    		
+    			<button type="button" class="ddie"id="dd">清空</button>
+    		
+    		
+    	</div>
+    </div>
+
+ 
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="./secret.js"></script>
+
+
+</html>
